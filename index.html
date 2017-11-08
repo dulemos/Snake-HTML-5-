@@ -1,10 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pong!</title>
-	<script type="text/javascript" src="js/script.js"></script>
+	<title>Snake Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+
 </head>
 <body>
-	<canvas id="teste" width="580" height="600"></canvas>
+	<div class="navbar navbar-inverse">
+	  <div class="navbar-inner">
+	    <a class="brand" href="#">Snake Game</a>
+	    <ul class="nav">
+	      <li class="active"><a href="#">Home</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<h3 class="text-center"> Seja bem-vindo!! </h3>
+	<div class="container-fluid">
+		
+		<p class="text-center">
+			Vamos lá!!! 
+		</p>
+		<br>
+		<p class="text-center">
+			Regras do jogo: 
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<td>1.</td>
+						<td>Colecte o maior número de maçãs o possível :) </td>
+					</tr>
+					<tr>
+						<td>2.</td>
+						<td>Cada maçã vale 1 pontos.</td>
+					</tr>
+					<tr>
+						<td>3.</td>
+						<td>Você terá apenas 1 vida :(</td>
+					</tr>
+					<tr>
+						<td>4.</td>
+						<td>Se encostar na parede, você perde sua vida... ta bom vai, você pode fazer até 10 pontos passando a parede</td>
+					</tr>
+					<tr>
+						<td>5.</td>
+						<td>Cuidado para não se comer.. seria um desaster(e você perde sua vida)</td>
+					</tr>
+					<tr>
+						<td>6.</td>
+						<td>Antes de pontuar, você é café com leite... ou seja, pode ignorar a regra 5 ;) </td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="col-md-6">
+				<button class="btn btn-lg btn-primary center-block" onclick="abreCanvas()">Jogar!</button>
+			</div>
+	</div>	
+
+
+	
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
 </body>
 </html>

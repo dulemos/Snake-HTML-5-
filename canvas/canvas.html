@@ -1,0 +1,142 @@
+<canvas id=bg height=400 width=400></canvas>
+<script>
+
+	window.onload = function(){
+	inicializar();
+	
+}
+
+	function inicializar(){
+		velo = 1000/12;
+		pontuacao = 0;
+		canv = document.getElementById("bg");
+		ctx = canv.getContext("2d");
+		gameovr = false;
+		document.addEventListener("keydown",keyPush);
+		aux = setInterval(jogo,velo);
+	}
+	pontuacao = 0;
+	playerx = playery = 10;
+	gs = tc = 20;
+	applex = appley = 15;
+	xspeed = yspeed = 0;
+	trail = [];
+	tail = 5;
+	var aux;
+
+	function jogo(){
+
+		if(gameovr){
+			fimJogo();
+			return;
+		}
+
+		playerx += xspeed;
+		playery += yspeed;
+		if(pontuacao <= 10){	
+			if(playerx<0) {
+			    playerx= tc-1;
+			}
+			if(playerx>tc-1) {
+			    playerx= 0;
+			}
+			if(playery<0) {
+			    playery= tc-1;
+			}
+			if(playery>tc-1) {
+			    playery= 0;
+			}
+		}
+		else{
+			if(playerx<0) {
+			    tail = 5;
+			    gameovr = true;
+			}
+			if(playerx>tc-1) {
+			    tail = 5;
+			    gameovr = true;
+			}
+			if(playery<0) {
+			    tail = 5;
+			    gameovr = true;
+			}
+			if(playery>tc-1) {
+			    tail = 5;
+			    gameovr = true;
+			}
+		}
+
+		ctx.fillStyle="black";
+		ctx.fillRect(0,0,canv.width,canv.height);
+
+		ctx.fillStyle="lime";
+		for(var i=1;i<trail.length;i++) {
+		    ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
+		        if(trail[i].x==playerx && trail[i].y==playery && pontuacao > 0) {
+		            tail = 5;
+		            ctx.fillStyle = "red";
+		            ctx.fillRect(trail[1].x*gs, trail[i].y*gs,gs-2,gs-2);
+		            gameovr = true;
+		        }
+
+		    }
+		trail.push({x:playerx,y:playery});
+		while(trail.length> tail){
+			trail.shift();
+		}	
+
+		if(applex==playerx && appley==playery) {
+		    tail++;
+		    pontuacao++;
+		    applex=Math.floor(Math.random()*tc);
+		    appley=Math.floor(Math.random()*tc);
+		}
+
+		ctx.fillStyle="red";
+		ctx.fillRect(applex*gs,appley*gs,gs-2,gs-2);
+
+		cont++;
+	}
+
+	function keyPush(evt) {
+			    switch(evt.keyCode) {
+			        case 37:
+			            xspeed=-1;yspeed=0;
+			            break;
+			        case 38:
+			            xspeed=0;yspeed=-1;
+			            break;
+			        case 39:
+			            xspeed=1;yspeed=0;
+			            break;
+			        case 40:
+			            xspeed=0;yspeed=1;
+			            break;
+			    }
+			}
+
+	function fimJogo(){
+		
+		ctx.fillStyle = "grey";
+		ctx.font="40px Georgia";
+		ctx.fillText("Game Over!",90,50); 
+		ctx.fillStyle = "grey";
+		ctx.font="20px Georgia";
+		ctx.fillText("Sua pontuação foi de: "+pontuacao+" pontos",0, 250)
+		ctx.fillStyle = "grey";
+		ctx.font="20px Georgia";
+		ctx.fillText("Clique para jogar novamente",75,350);
+		canv.onclick = function(evt){
+			/*ctx.clearRect(0,0,canv.width,canv.height);
+			ctx.font="40px Georgia";
+			ctx.fillText("Deu certo!",50,200);*/
+			clearInterval(aux);
+			inicializar();
+
+
+		}
+	}
+
+
+
+</script>
